@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Search from './Search'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu';
@@ -7,8 +7,10 @@ import AppsIcon from '@material-ui/icons/Apps';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Avatar, Divider, Drawer, makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import Menu, { StyledMenuItem } from '../Menu/Menu';
+import { StyledMenuItem } from '../Menu/Menu';
 import { Home, Whatshot, Subscriptions } from '@material-ui/icons';
+import { MediasContext } from '../../context/MediasContext';
+import { IMedias, Genre } from '../../model/IMedia';
 
 const StyledWrapperHeader = styled.div`
   display: flex;
@@ -37,6 +39,7 @@ const useStyles = makeStyles({
 const Header = () => {
   const classes = useStyles();
   const [viewLeftMenu, setViewLefMenu] = useState<boolean>(false);
+  const { state } = useContext<IMedias>(MediasContext);
 
   return (
     <>
@@ -83,6 +86,7 @@ const Header = () => {
             <h2>Abonnements</h2>
           </StyledMenuItem>
           <Divider classes={{ root: classes.DividerStyle }} />
+          {state.genres.map((it: Genre) => <StyledMenuItem fromPanel key={it.id}>{it.name}</StyledMenuItem>)}
 
         </>
 

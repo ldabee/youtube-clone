@@ -34,3 +34,10 @@ export const tmdbGetMovieInfo = (id) => axios.create({
     language: 'fr-FR',
   }
 })
+export const tmdbGetAllGenres = () => axios.create({
+  baseURL: `https://api.themoviedb.org/3/genre/movie/list`,
+  params: {
+    api_key: `${process.env.REACT_APP_TMDB_API_KEY}`,
+    language: 'fr-FR',
+  }
+})

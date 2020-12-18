@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import { IMedias, IMediasActionType, initialStateMedias, MediasTyp } from '../model/IMedia';
 
-import { tmdbGetMovieInfo, tmdbGetMovieVideo, tmdbList, tmdbSearch } from '../api/movieDb';
+import { tmdbGetAllGenres, tmdbGetMovieInfo, tmdbGetMovieVideo, tmdbList, tmdbSearch } from '../api/movieDb';
 import _ from 'lodash';
 
 
@@ -12,6 +12,11 @@ const reducerMedias = (state: IMedias = initialStateMedias, action: IMediasActio
       return {
         ...state,
         medias: action.medias
+      }
+    case MediasTyp.getAllGenresSuccess:
+      return {
+        ...state,
+        genres: action.genres
       }
     case MediasTyp.mediasByCategory:
       return {
@@ -70,12 +75,19 @@ const MediasContextProvider = (props: any): JSX.Element => {
         let res2 = response2.data;
         dispatch({ type: MediasTyp.getOneMedia, mediaInfo: { videos, ...res2 } });
         break;
+      case MediasTyp.getAllGenres:
+        const responseGenres = await tmdbGetAllGenres().get('', { params: {} });
+        let resGenres = responseGenres.data.genres;
+        dispatch({ type: MediasTyp.getAllGenresSuccess, genres: resGenres })
+        break;
+
       default: dispatch(action)
     }
   }
 
   useEffect(() => {
     Dispatch({ type: MediasTyp.fetchAll, page: 1 })
+    Dispatch({ type: MediasTyp.getAllGenres })
   }, [MediasState.keyword])
 
   return (

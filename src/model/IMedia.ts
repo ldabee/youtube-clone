@@ -1,6 +1,8 @@
 
 export enum MediasTyp {
   fetchAll = "fetchAll",
+  getAllGenres = "getAllGenres",
+  getAllGenresSuccess = "getAllGenresSuccess",
   getAllMedias = "getAllMedias",
   setOneMedia = "setOneMedia",
   getOneMedia = "getOneMedia",
@@ -10,6 +12,8 @@ export enum MediasTyp {
 
 export type IMediasActionType =
   | { type: MediasTyp.fetchAll, page: number }
+  | { type: MediasTyp.getAllGenres }
+  | { type: MediasTyp.getAllGenresSuccess, genres: Genre[] }
   | { type: MediasTyp.getAllMedias, medias: IMedia[] }
   | { type: MediasTyp.setOneMedia, selectedMedia: number }
   | { type: MediasTyp.getOneMedia, mediaInfo: ISelectedMedia }
@@ -23,6 +27,7 @@ export interface IMedias {
   mediaInfo: ISelectedMedia;
   Category: string;
   keyword: string;
+  genres: Genre[];
 }
 
 export const initialStateMedias: IMedias = {
@@ -31,6 +36,7 @@ export const initialStateMedias: IMedias = {
   mediaInfo: {} as ISelectedMedia,
   Category: "",
   keyword: "",
+  genres: []
 }
 
 export interface IMedia {
@@ -100,7 +106,7 @@ interface Productioncompany {
   origin_country: string;
 }
 
-interface Genre {
+export interface Genre {
   id: number;
   name: string;
 }
