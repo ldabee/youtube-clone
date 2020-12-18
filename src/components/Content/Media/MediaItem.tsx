@@ -9,7 +9,7 @@ const MediaItem: FC<IMedia> = (props: IMedia) => {
 
   const StyledMediaItemWrapper = styled.div`
    max-width: 300px;
-   height: 300px; 
+   height: auto; 
    color: white;
    margin: 15px;
    cursor: pointer;
