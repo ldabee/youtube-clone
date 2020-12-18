@@ -2,9 +2,9 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 //Context
-import { MediasContext, MediasTyp } from '../../context/MediasContext';
+import { MediasContext, MediasTyp, IMedias } from '../../context/MediasContext';
 //Interfaces
-import { Genre, IMedia, IMedias } from '../../model/IMedia';
+import { Genre, IMedia } from '../../model/IMedia';
 //Libraries
 import { Home, Whatshot, Subscriptions } from '@material-ui/icons';
 

@@ -1,8 +1,26 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import { Genre, IMedia, IMedias, initialStateMedias, ISelectedMedia } from '../model/IMedia';
+import { Genre, IMedia, ISelectedMedia } from '../model/IMedia';
 
 import { tmdbGetAllGenres, tmdbGetMovieInfo, tmdbGetMovieVideo, tmdbList, tmdbSearch } from '../api/movieDb';
 import _ from 'lodash';
+
+export interface IMedias {
+  medias: IMedia[];
+  selectedMedia: number;
+  mediaInfo: ISelectedMedia;
+  Category: Genre;
+  keyword: string;
+  genres: Genre[];
+}
+
+export const initialStateMedias: IMedias = {
+  medias: [],
+  selectedMedia: 0,
+  mediaInfo: {} as ISelectedMedia,
+  Category: {} as Genre,
+  keyword: "",
+  genres: []
+}
 
 export enum MediasTyp {
   getAllGenres = "getAllGenres",

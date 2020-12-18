@@ -9,8 +9,8 @@ import { Avatar, Divider, Drawer, makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import { StyledMenuItem } from '../Menu/Menu';
 import { Home, Whatshot, Subscriptions, Category } from '@material-ui/icons';
-import { MediasContext, MediasTyp } from '../../context/MediasContext';
-import { IMedias, Genre } from '../../model/IMedia';
+import { MediasContext, MediasTyp, IMedias } from '../../context/MediasContext';
+import { Genre } from '../../model/IMedia';
 
 const StyledWrapperHeader = styled.div`
   display: flex;

@@ -1,21 +1,3 @@
-export interface IMedias {
-  medias: IMedia[];
-  selectedMedia: number;
-  mediaInfo: ISelectedMedia;
-  Category: Genre;
-  keyword: string;
-  genres: Genre[];
-}
-
-export const initialStateMedias: IMedias = {
-  medias: [],
-  selectedMedia: 0,
-  mediaInfo: {} as ISelectedMedia,
-  Category: {} as Genre,
-  keyword: "",
-  genres: []
-}
-
 export interface IMedia {
   id: number;
   video: boolean;
