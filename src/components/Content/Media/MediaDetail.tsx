@@ -47,14 +47,6 @@ const MediaDetail: FC = () => {
               </div>
             }
           </Grid>
-          {/* <Grid item xs={2}>
-            <Grid container spacing={3} justify={"center"}>
-              <span>Others videos</span>
-              <ul>
-                {state?.mediaInfo?.videos?.filter((v) => v.key !== state?.mediaInfo.videos[0].key).map((video) => <li key={video.id} onClick={() => { }}>{video.name}</li>)}
-              </ul>
-            </Grid>
-          </Grid> */}
         </Grid>
         <Grid container spacing={3} alignContent={'center'} style={{ color: 'white' }}>
           <Grid item xs={12}>

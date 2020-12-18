@@ -40,29 +40,34 @@ const MediaContent: FC = () => {
     dispatch({ type: MediasTyp.getAllMedias })
   }, [state.Category])
 
+  const renderMedias = () => {
+    return (
+      !_.isEmpty(state.Category) ?
+        state?.medias?.filter((it: IMedia) => it.genre_ids.includes(state.Category.id)).map((media: IMedia) =>
+          <div key={media.id}>
+            <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
+              <MediaItem  {...media} />
+            </Link>
+          </div>
+        )
+        :
+        state?.medias?.map((media: IMedia) =>
+          <div key={media.id}>
+            <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
+              <MediaItem  {...media} />
+            </Link>
+          </div>
+        )
+    )
+
+  }
+
   return (
     <>
       <Grid container spacing={3} justify={'center'}>
         <Grid item xs={12}>
           <Paper variant={'elevation'} className={classes.paper}>
-            {
-              !_.isEmpty(state.Category) ?
-                state?.medias?.filter((it: IMedia) => it.genre_ids.includes(state.Category.id)).map((media: IMedia) =>
-                  <div key={media.id}>
-                    <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
-                      <MediaItem  {...media} />
-                    </Link>
-                  </div>
-                )
-                :
-                state?.medias?.map((media: IMedia) =>
-                  <div key={media.id}>
-                    <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
-                      <MediaItem  {...media} />
-                    </Link>
-                  </div>
-                )
-            }
+            {renderMedias()}
           </Paper>
           <Grid container justify={'center'} alignItems={'center'}>
             <Grid item>

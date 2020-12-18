@@ -13,7 +13,9 @@ interface IPictureProps {
 }
 
 const Picture: FC<IPictureProps> = ({ src, alt }) => {
-  return src !== null ? <StyledPicture src={`https://image.tmdb.org/t/p/w300/${src}`} alt={alt} /> : <StyledPicture src={'https://www.labaleine.fr/sites/default/files/image-not-found.jpg'} alt={alt} />
+  return src !== null ?
+    <StyledPicture src={`https://image.tmdb.org/t/p/w300/${src}`} alt={alt} /> :
+    <StyledPicture src={'https://www.labaleine.fr/sites/default/files/image-not-found.jpg'} alt={alt} />
 }
 
 export default Picture
