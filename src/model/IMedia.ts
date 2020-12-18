@@ -17,7 +17,7 @@ export type IMediasActionType =
   | { type: MediasTyp.getAllMedias, medias: IMedia[] }
   | { type: MediasTyp.setOneMedia, selectedMedia: number }
   | { type: MediasTyp.getOneMedia, mediaInfo: ISelectedMedia }
-  | { type: MediasTyp.mediasByCategory, Category: string }
+  | { type: MediasTyp.mediasByCategory, Category: Genre }
   | { type: MediasTyp.searchKey, keyword: string };
 
 
@@ -25,7 +25,7 @@ export interface IMedias {
   medias: IMedia[];
   selectedMedia: number;
   mediaInfo: ISelectedMedia;
-  Category: string;
+  Category: Genre;
   keyword: string;
   genres: Genre[];
 }
@@ -34,7 +34,7 @@ export const initialStateMedias: IMedias = {
   medias: [],
   selectedMedia: 0,
   mediaInfo: {} as ISelectedMedia,
-  Category: "",
+  Category: {} as Genre,
   keyword: "",
   genres: []
 }

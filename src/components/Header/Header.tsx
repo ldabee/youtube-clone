@@ -8,9 +8,9 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Avatar, Divider, Drawer, makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import { StyledMenuItem } from '../Menu/Menu';
-import { Home, Whatshot, Subscriptions } from '@material-ui/icons';
+import { Home, Whatshot, Subscriptions, Category } from '@material-ui/icons';
 import { MediasContext } from '../../context/MediasContext';
-import { IMedias, Genre } from '../../model/IMedia';
+import { IMedias, Genre, MediasTyp } from '../../model/IMedia';
 
 const StyledWrapperHeader = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 const Header = () => {
   const classes = useStyles();
   const [viewLeftMenu, setViewLefMenu] = useState<boolean>(false);
-  const { state } = useContext<IMedias>(MediasContext);
+  const { state, dispatch } = useContext<IMedias>(MediasContext);
 
   return (
     <>
@@ -86,7 +86,18 @@ const Header = () => {
             <h2>Abonnements</h2>
           </StyledMenuItem>
           <Divider classes={{ root: classes.DividerStyle }} />
-          {state.genres.map((it: Genre) => <StyledMenuItem fromPanel key={it.id}>{it.name}</StyledMenuItem>)}
+          <StyledMenuItem fromPanel>
+            <Category />
+            <h2>Genres</h2>
+          </StyledMenuItem>
+          <div style={{ height: '40vh', overflowY: 'auto', marginBottom: '10px' }}>
+            {state.genres.map((it: Genre) =>
+              <StyledMenuItem fromPanel key={it.id} onClick={() => dispatch({ type: MediasTyp.mediasByCategory, Category: it })}>
+                {it.name}
+              </StyledMenuItem>
+            )}
+          </div>
+          <Divider classes={{ root: classes.DividerStyle }} />
 
         </>
 

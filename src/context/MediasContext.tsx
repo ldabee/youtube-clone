@@ -88,7 +88,7 @@ const MediasContextProvider = (props: any): JSX.Element => {
   useEffect(() => {
     Dispatch({ type: MediasTyp.fetchAll, page: 1 })
     Dispatch({ type: MediasTyp.getAllGenres })
-  }, [MediasState.keyword])
+  }, [MediasState.Category])
 
   return (
     <MediasContext.Provider value={{ state: MediasState, dispatch: Dispatch }}>

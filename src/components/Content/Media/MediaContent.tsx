@@ -9,6 +9,8 @@ import { Paper, Button, Grid, Theme, createStyles, makeStyles } from '@material-
 //Context
 import { MediasContext } from '../../../context/MediasContext';
 
+import _ from 'lodash';
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,7 +38,7 @@ const MediaContent: FC = () => {
 
   useEffect(() => {
     dispatch({ type: MediasTyp.fetchAll, page: page })
-  }, [page])
+  }, [page, state.Category])
 
   return (
     <>
@@ -44,13 +46,22 @@ const MediaContent: FC = () => {
         <Grid item xs={12}>
           <Paper variant={'elevation'} className={classes.paper}>
             {
-              state?.medias?.map((media: IMedia) =>
-                <div key={media.id}>
-                  <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
-                    <MediaItem  {...media} />
-                  </Link>
-                </div>
-              )
+              !_.isEmpty(state.Category) ?
+                state?.medias?.filter((it: IMedia) => it.genre_ids.includes(state.Category.id)).map((media: IMedia) =>
+                  <div key={media.id}>
+                    <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
+                      <MediaItem  {...media} />
+                    </Link>
+                  </div>
+                )
+                :
+                state?.medias?.map((media: IMedia) =>
+                  <div key={media.id}>
+                    <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
+                      <MediaItem  {...media} />
+                    </Link>
+                  </div>
+                )
             }
           </Paper>
           <Grid container justify={'center'} alignItems={'center'}>
