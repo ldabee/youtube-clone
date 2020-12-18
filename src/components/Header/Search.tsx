@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { MediasContext } from '../../context/MediasContext';
-import { MediasTyp } from '../../model/IMedia';
+import { MediasContext, MediasTyp } from '../../context/MediasContext';
 import { Search as Searching } from '@material-ui/icons';
 import { IconButton } from '@material-ui/core';
 
@@ -11,7 +10,7 @@ const Search = () => {
   const [inputVal, setInputVal] = useState<string>('');
 
   const filterMedias = () => {
-    dispatch({ type: MediasTyp.searchKey, keyword: inputVal });
+    dispatch({ type: MediasTyp.getAllMediaBySearch, keyword: inputVal });
     setInputVal('');
   }
 

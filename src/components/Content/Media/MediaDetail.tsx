@@ -27,8 +27,6 @@ const MediaDetail: FC = () => {
 
   const video = (state?.mediaInfo?.videos && state?.mediaInfo?.videos.length) ? state?.mediaInfo?.videos?.find((video) => video.key !== undefined || video.key !== null).key : '';
 
-
-
   return (
     <div>
       <Grid container spacing={3} className={classes.paper}>

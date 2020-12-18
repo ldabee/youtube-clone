@@ -5,8 +5,7 @@ import ContentWrapper from './ContentWrapper';
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
 //Libraries
-import { createStyles, Divider, Drawer, List, ListItem, ListItemText, makeStyles, Theme } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -82,38 +81,6 @@ const DashBoard = () => {
           <ContentWrapper />
         </Router>
       </div>
-
-      {/*Menu user */}
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="right"
-
-        open={false}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <Close onClick={() => { }} />
-        </div>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
     </Fragment>
   )
 }

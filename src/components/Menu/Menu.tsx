@@ -2,9 +2,9 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 //Context
-import { MediasContext } from '../../context/MediasContext';
+import { MediasContext, MediasTyp } from '../../context/MediasContext';
 //Interfaces
-import { IMedia, IMedias, MediasTyp } from '../../model/IMedia';
+import { Genre, IMedia, IMedias } from '../../model/IMedia';
 //Libraries
 import { Home, Whatshot, Subscriptions } from '@material-ui/icons';
 
@@ -68,10 +68,8 @@ const Menu: FC = () => {
           <StyledMenuItem
             onClick={
               () => {
-                dispatch({ type: MediasTyp.fetchAll });
-                dispatch({ type: MediasTyp.mediasByCategory, Category: '' });
-                dispatch({ type: MediasTyp.searchKey, keyword: '' });
-                dispatch({ type: MediasTyp.getOneMedia, mediaInfo: {} })
+                dispatch({ type: MediasTyp.getAllMedias });
+                dispatch({ type: MediasTyp.mediasByCategory, Category: {} as Genre })
               }
             }
           >
@@ -79,29 +77,11 @@ const Menu: FC = () => {
             <h2>Accueil</h2>
           </StyledMenuItem>
         </Link>
-        <StyledMenuItem
-          onClick={
-            () => {
-              dispatch({ type: MediasTyp.fetchAll });
-              dispatch({ type: MediasTyp.mediasByCategory, Category: '' });
-              dispatch({ type: MediasTyp.searchKey, keyword: '' });
-              dispatch({ type: MediasTyp.getOneMedia, mediaInfo: {} })
-            }
-          }
-        >
+        <StyledMenuItem onClick={() => { }}>
           <Whatshot />
           <h2>Tendances</h2>
         </StyledMenuItem>
-        <StyledMenuItem
-          onClick={
-            () => {
-              dispatch({ type: MediasTyp.fetchAll });
-              dispatch({ type: MediasTyp.mediasByCategory, Category: '' });
-              dispatch({ type: MediasTyp.searchKey, keyword: '' });
-              dispatch({ type: MediasTyp.getOneMedia, mediaInfo: {} })
-            }
-          }
-        >
+        <StyledMenuItem onClick={() => { }} >
           <Subscriptions />
           <h2>Abonnements</h2>
         </StyledMenuItem>

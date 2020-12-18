@@ -1,20 +1,18 @@
 import axios from 'axios';
 
-export const tmdbList = (page) => axios.create({
+export const tmdbList = () => axios.create({
   baseURL: 'https://api.themoviedb.org/3/trending/all/week',
   params: {
     api_key: `${process.env.REACT_APP_TMDB_API_KEY}`,
     maxResults: 20,
-    page: page,
   }
 })
 
-export const tmdbSearch = axios.create({
+export const tmdbSearch = () => axios.create({
   baseURL: 'https://api.themoviedb.org/3/search/movie',
   params: {
     api_key: `${process.env.REACT_APP_TMDB_API_KEY}`,
     language: 'fr-FR',
-    page: 1,
     include_adult: false,
   }
 })

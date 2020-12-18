@@ -1,13 +1,13 @@
 import React, { FC, useContext, useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 //Interfaces
-import { IMedia, IMedias, MediasTyp } from '../../../model/IMedia';
+import { IMedia, IMedias } from '../../../model/IMedia';
 //Components
 import MediaItem from './MediaItem';
 //Libraries
 import { Paper, Button, Grid, Theme, createStyles, makeStyles } from '@material-ui/core';
 //Context
-import { MediasContext } from '../../../context/MediasContext';
+import { MediasContext, MediasTyp } from '../../../context/MediasContext';
 
 import _ from 'lodash';
 
@@ -37,8 +37,8 @@ const MediaContent: FC = () => {
   }
 
   useEffect(() => {
-    dispatch({ type: MediasTyp.fetchAll, page: page })
-  }, [page, state.Category])
+    dispatch({ type: MediasTyp.getAllMedias })
+  }, [state.Category])
 
   return (
     <>

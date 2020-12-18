@@ -9,8 +9,8 @@ import { Avatar, Divider, Drawer, makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import { StyledMenuItem } from '../Menu/Menu';
 import { Home, Whatshot, Subscriptions, Category } from '@material-ui/icons';
-import { MediasContext } from '../../context/MediasContext';
-import { IMedias, Genre, MediasTyp } from '../../model/IMedia';
+import { MediasContext, MediasTyp } from '../../context/MediasContext';
+import { IMedias, Genre } from '../../model/IMedia';
 
 const StyledWrapperHeader = styled.div`
   display: flex;
@@ -66,6 +66,7 @@ const Header = () => {
           </IconButton>
         </div>
       </StyledWrapperHeader>
+
       <Drawer classes={{ paper: classes.DrawerWidth }} open={viewLeftMenu} onClose={() => setViewLefMenu(false)}>
         <>
           <StyledMenuItem onClick={() => setViewLefMenu(false)} fromPanel>

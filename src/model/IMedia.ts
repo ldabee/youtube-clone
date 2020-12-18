@@ -1,26 +1,3 @@
-
-export enum MediasTyp {
-  fetchAll = "fetchAll",
-  getAllGenres = "getAllGenres",
-  getAllGenresSuccess = "getAllGenresSuccess",
-  getAllMedias = "getAllMedias",
-  setOneMedia = "setOneMedia",
-  getOneMedia = "getOneMedia",
-  mediasByCategory = "mediasByCategory",
-  searchKey = "searchKey"
-}
-
-export type IMediasActionType =
-  | { type: MediasTyp.fetchAll, page: number }
-  | { type: MediasTyp.getAllGenres }
-  | { type: MediasTyp.getAllGenresSuccess, genres: Genre[] }
-  | { type: MediasTyp.getAllMedias, medias: IMedia[] }
-  | { type: MediasTyp.setOneMedia, selectedMedia: number }
-  | { type: MediasTyp.getOneMedia, mediaInfo: ISelectedMedia }
-  | { type: MediasTyp.mediasByCategory, Category: Genre }
-  | { type: MediasTyp.searchKey, keyword: string };
-
-
 export interface IMedias {
   medias: IMedia[];
   selectedMedia: number;
