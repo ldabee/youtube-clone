@@ -39,6 +39,7 @@ const useStyles = makeStyles({
 const Header = () => {
   const classes = useStyles();
   const [viewLeftMenu, setViewLefMenu] = useState<boolean>(false);
+  const [viewCategory, setViewCategory] = useState<boolean>(false);
   const { state, dispatch } = useContext<IMedias>(MediasContext);
 
   return (
@@ -87,17 +88,18 @@ const Header = () => {
             <h2>Abonnements</h2>
           </StyledMenuItem>
           <Divider classes={{ root: classes.DividerStyle }} />
-          <StyledMenuItem fromPanel>
+          <StyledMenuItem fromPanel onClick={() => setViewCategory(!viewCategory)}>
             <Category />
             <h2>Genres</h2>
           </StyledMenuItem>
-          <div style={{ height: '40vh', overflowY: 'auto', marginBottom: '10px' }}>
+
+          {viewCategory && <div style={{ height: '40vh', overflowY: 'auto', marginBottom: '10px' }}>
             {state.genres.map((it: Genre) =>
               <StyledMenuItem fromPanel key={it.id} onClick={() => { dispatch({ type: MediasTyp.mediasByCategory, Category: it }); setViewLefMenu(false) }}>
                 {it.name}
               </StyledMenuItem>
             )}
-          </div>
+          </div>}
           <Divider classes={{ root: classes.DividerStyle }} />
 
         </>
