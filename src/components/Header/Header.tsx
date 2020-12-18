@@ -92,7 +92,7 @@ const Header = () => {
           </StyledMenuItem>
           <div style={{ height: '40vh', overflowY: 'auto', marginBottom: '10px' }}>
             {state.genres.map((it: Genre) =>
-              <StyledMenuItem fromPanel key={it.id} onClick={() => dispatch({ type: MediasTyp.mediasByCategory, Category: it })}>
+              <StyledMenuItem fromPanel key={it.id} onClick={() => { dispatch({ type: MediasTyp.mediasByCategory, Category: it }); setViewLefMenu(false) }}>
                 {it.name}
               </StyledMenuItem>
             )}
