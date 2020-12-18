@@ -16,7 +16,7 @@ const StyledContentWrapper = styled.div`
     justify-content:center
   }
 `
-
+console.log('test');
 const ContentWrapper: FC = () => {
   return (
     <StyledContentWrapper>
