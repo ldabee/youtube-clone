@@ -3,7 +3,6 @@ import { IUser } from '../model/IUser';
 
 
 import { UsersServ_RetrieveAllUsers } from '../services/usersServices';
-import _ from 'lodash';
 
 export interface IUsers {
   users: IUser[];

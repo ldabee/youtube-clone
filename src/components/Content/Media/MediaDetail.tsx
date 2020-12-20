@@ -1,7 +1,7 @@
 import { createStyles, Divider, Grid, makeStyles, Theme } from '@material-ui/core';
 import moment from 'moment';
 import React, { useContext, FC } from 'react';
-import { MediasContext, IMedias } from '../../../context/MediasContext';
+import { MediasContext } from '../../../context/MediasContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
