@@ -1,7 +1,8 @@
 import { createStyles, Divider, Grid, makeStyles, Theme } from '@material-ui/core';
 import moment from 'moment';
-import React, { useContext, FC } from 'react';
-import { MediasContext } from '../../../context/MediasContext';
+import React, { useContext, FC, useEffect } from 'react';
+import { MediasContext, MediasTyp } from '../../../context/MediasContext';
+import { ISelectedMedia } from '../../../model/IMedia';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +23,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MediaDetail: FC = () => {
   const classes = useStyles();
-  const { state } = useContext(MediasContext);
+  const { state, dispatch } = useContext(MediasContext);
+
+  useEffect(() => {
+    return () => dispatch({ type: MediasTyp.getOneMedia, mediaInfo: {} as ISelectedMedia })
+  }, [])
 
   const video = (state?.mediaInfo?.videos && state?.mediaInfo?.videos.length) ? state?.mediaInfo?.videos?.find((video) => video.key !== undefined || video.key !== null)?.key : '';
 
