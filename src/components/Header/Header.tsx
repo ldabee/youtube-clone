@@ -9,8 +9,9 @@ import { Avatar, Divider, Drawer, makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import { StyledMenuItem } from '../Menu/Menu';
 import { Home, Whatshot, Subscriptions, Category } from '@material-ui/icons';
-import { MediasContext, MediasTyp, IMedias } from '../../context/MediasContext';
+import { MediasContext, MediasTyp } from '../../context/MediasContext';
 import { Genre } from '../../model/IMedia';
+import { UsersServ_RetrieveAllUsers } from '../../services/usersServices';
 
 const StyledWrapperHeader = styled.div`
   display: flex;
@@ -40,7 +41,11 @@ const Header = () => {
   const classes = useStyles();
   const [viewLeftMenu, setViewLefMenu] = useState<boolean>(false);
   const [viewCategory, setViewCategory] = useState<boolean>(false);
-  const { state, dispatch } = useContext<IMedias>(MediasContext);
+  const { state, dispatch } = useContext(MediasContext);
+
+  useEffect(() => {
+    UsersServ_RetrieveAllUsers().then((val) => console.log(val.data))
+  }, [])
 
   return (
     <>

@@ -47,7 +47,7 @@ export const StyledMenuItem = styled.div<{ fromPanel?: boolean }>`
 `
 
 const Menu: FC = () => {
-  const { state, dispatch } = useContext<IMedias>(MediasContext);
+  const { state, dispatch } = useContext(MediasContext);
 
   const [, setTags] = useState<string[]>([]);
 

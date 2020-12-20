@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MediaDetail: FC = () => {
   const classes = useStyles();
-  const { state } = useContext<IMedias>(MediasContext);
+  const { state } = useContext(MediasContext);
 
-  const video = (state?.mediaInfo?.videos && state?.mediaInfo?.videos.length) ? state?.mediaInfo?.videos?.find((video) => video.key !== undefined || video.key !== null).key : '';
+  const video = (state?.mediaInfo?.videos && state?.mediaInfo?.videos.length) ? state?.mediaInfo?.videos?.find((video) => video.key !== undefined || video.key !== null)?.key : '';
 
   return (
     <div>

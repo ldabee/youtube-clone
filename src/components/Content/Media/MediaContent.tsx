@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const MediaContent: FC = () => {
-  const { state, dispatch } = useContext<IMedias>(MediasContext);
+  const { state, dispatch } = useContext(MediasContext);
   const classes = useStyles();
 
   // const [selectedItem, setSelectedItem] = useState<IMedia>({});

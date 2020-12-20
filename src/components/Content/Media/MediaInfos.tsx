@@ -25,7 +25,7 @@ const StyledTitle = styled.div`
   align-items: center
 `
 
-const MediaInfos: FC<IMediaInfos> = (props: IMedia) => {
+const MediaInfos: FC<IMedia> = (props) => {
   return (
     <StyledMediaInfos>
       <StyledTitle>
