@@ -11,7 +11,7 @@ import { StyledMenuItem } from '../Menu/Menu';
 import { Home, Whatshot, Subscriptions, Category } from '@material-ui/icons';
 import { MediasContext, MediasTyp } from '../../context/MediasContext';
 import { Genre } from '../../model/IMedia';
-import { UsersServ_RetrieveAllUsers } from '../../services/usersServices';
+import { UsersContext, UsersTyp } from '../../context/UsersContext';
 
 const StyledWrapperHeader = styled.div`
   display: flex;
@@ -42,9 +42,10 @@ const Header = () => {
   const [viewLeftMenu, setViewLefMenu] = useState<boolean>(false);
   const [viewCategory, setViewCategory] = useState<boolean>(false);
   const { state, dispatch } = useContext(MediasContext);
+  const UsersState = useContext(UsersContext);
 
   useEffect(() => {
-    UsersServ_RetrieveAllUsers().then((val) => console.log(val.data))
+    UsersState.dispatch({ type: UsersTyp.getAllusers })
   }, [])
 
   return (
