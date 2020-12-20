@@ -2,7 +2,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 //Context
-import { MediasContext, MediasTyp, IMedias } from '../../context/MediasContext';
+import { MediasContext, MediasTyp } from '../../context/MediasContext';
 //Interfaces
 import { Genre, IMedia } from '../../model/IMedia';
 //Libraries

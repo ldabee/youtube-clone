@@ -7,7 +7,7 @@ import MediaItem from './MediaItem';
 //Libraries
 import { Paper, Button, Grid, Theme, createStyles, makeStyles } from '@material-ui/core';
 //Context
-import { MediasContext, MediasTyp, IMedias } from '../../../context/MediasContext';
+import { MediasContext, MediasTyp } from '../../../context/MediasContext';
 
 import _ from 'lodash';
 
