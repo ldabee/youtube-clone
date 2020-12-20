@@ -1,42 +1,60 @@
 import React, { useContext, useState } from 'react'
 import { MediasContext, MediasTyp } from '../../context/MediasContext';
-import { Search as Searching } from '@material-ui/icons';
-import { IconButton } from '@material-ui/core';
+import { createStyles, Divider, IconButton, InputBase, makeStyles, Paper, Theme } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: '2px 4px',
+      display: 'flex',
+      alignItems: 'center',
+      width: 400,
+      background: 'none',
+
+    },
+    input: {
+      marginLeft: theme.spacing(1),
+      flex: 1,
+      color: 'white'
+    },
+    divider: {
+      height: 28,
+      margin: 4,
+    },
+  }),
+);
 
 
 const Search = () => {
+  const classes = useStyles();
   const { dispatch } = useContext(MediasContext);
 
   const [inputVal, setInputVal] = useState<string>('');
 
-  const filterMedias = () => {
+  const filterMedias = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     dispatch({ type: MediasTyp.getAllMediaBySearch, keyword: inputVal });
     setInputVal('');
   }
 
 
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      width: '40%',
-      border: '1px solid rgba(150, 150, 150,0.2)',
-      borderRadius: '2px',
-      height: '30px',
-      backgroundColor: 'black',
-      paddingLeft: '10px'
-    }}>
-      <input
-        style={{ flex: 1, border: 'none', background: 'none', color: 'inherit', padding: '10px', outline: 'none' }}
-        type='text'
-        placeholder="Rechercher"
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setInputVal(event.target.value)}
+    <Paper component="form" className={classes.root}>
+      <InputBase
         value={inputVal}
+        className={classes.input}
+        placeholder="Rechercher"
+        inputProps={{ 'aria-label': 'search google maps' }}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => { setInputVal(event.target.value) }}
       />
-      <IconButton onClick={() => filterMedias()}>
-        <Searching style={{ width: '50px ', borderLeft: '1px solid rgba(150, 150, 150,0.2)' }} />
-      </IconButton>
-    </div>
+      <Divider className={classes.divider} orientation="vertical" />
+      <div style={{ backgroundColor: '#303030', color: 'white' }}>
+        <IconButton type="submit" aria-label="search" onClick={(e) => filterMedias(e)}>
+          <SearchIcon />
+        </IconButton>
+      </div>
+    </Paper>
   )
 }
 

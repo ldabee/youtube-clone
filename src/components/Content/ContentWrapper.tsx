@@ -9,7 +9,7 @@ const StyledContentWrapper = styled.div`
   padding-bottom:0;
   display: flex;
   flex-wrap: wrap;
-  margin-left:9%;
+  margin-left:7%;
   min-width:90%;
 
   @media screen and (max-width: 790px){
