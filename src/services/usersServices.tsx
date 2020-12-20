@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { IUser } from '../model/IUser';
 export const REACT_APP_ConnectAPI = process.env.REACT_APP_ConnectAPI;
 
-export async function UsersServ_RetrieveAllUsers(): Promise<any | undefined> {
-  const allUsers: any | undefined = await axios
+export async function UsersServ_RetrieveAllUsers(): Promise<IUser[] | undefined> {
+  const allUsers: IUser[] | undefined = await axios
     .get(`${REACT_APP_ConnectAPI}/users/allUsers`).then(responseArr => {
-      const users: any = responseArr.data;
+      const users: IUser[] = responseArr.data;
       return users;
     });
   return allUsers;

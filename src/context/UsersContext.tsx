@@ -51,7 +51,10 @@ const UsersContextProvider = (props: any): JSX.Element => {
     switch (action.type) {
       case UsersTyp.getAllusers:
         const responseForAll = await UsersServ_RetrieveAllUsers();
-        dispatch({ type: UsersTyp.getAllusersSuccess, users: responseForAll });
+        const res: IUser[] | undefined = responseForAll;
+        if (res !== undefined) {
+          dispatch({ type: UsersTyp.getAllusersSuccess, users: res });
+        }
         break;
       default: dispatch(action)
     }
