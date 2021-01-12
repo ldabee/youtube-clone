@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { IMedia } from '../../../model/IMedia';
+import { IMedia, ITVShows } from '../../../model/IMedia';
 
 interface IMediaInfos {
   title: string;
@@ -25,15 +25,15 @@ const StyledTitle = styled.div`
   align-items: center
 `
 
-const MediaInfos: FC<IMedia> = (props) => {
+const MediaInfos: FC<IMedia | ITVShows> = (props: IMedia | ITVShows) => {
   return (
     <StyledMediaInfos>
       <StyledTitle>
-        {props.title ? props.title : props.name}
+        {props.name}
       </StyledTitle>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', marginTop: '15px' }}>
         <span>{props.popularity}</span>
-        <span> {props.vote_count} likes . {moment(props.release_date).fromNow()}</span>
+        {/* <span> {props.vote_count} likes . {moment(props.release_date).fromNow()}</span> */}
       </div>
     </StyledMediaInfos>
   )

@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import { Genre, IMedia, ISelectedMedia } from '../model/IMedia';
+import { Genre, IMedia, ISelectedMedia, ITVShows } from '../model/IMedia';
 
-import { tmdbGetAllGenres, tmdbGetMovieInfo, tmdbGetMovieVideo, tmdbList, tmdbSearch } from '../api/movieDb';
+import { tmdbGetAllGenres, tmdbGetMovieInfo, tmdbGetMovieVideo, tmdbGetTVShows, tmdbList, tmdbSearch } from '../api/movieDb';
 import _ from 'lodash';
 
 export interface IMedias {
@@ -11,6 +11,9 @@ export interface IMedias {
   Category: Genre;
   keyword: string;
   genres: Genre[];
+  TVShows: ITVShows[];
+  choice: string;
+
 }
 
 export const initialStateMedias: IMedias = {
@@ -19,7 +22,9 @@ export const initialStateMedias: IMedias = {
   mediaInfo: {} as ISelectedMedia,
   Category: {} as Genre,
   keyword: "",
-  genres: []
+  genres: [],
+  TVShows: [],
+  choice: 'Movies'
 }
 
 export enum MediasTyp {
@@ -31,6 +36,9 @@ export enum MediasTyp {
   setOneMedia = "setOneMedia",
   getOneMedia = "getOneMedia",
   mediasByCategory = "mediasByCategory",
+  getAllTVShows = "getAllTVShows",
+  getAllTVShowsSuccess = "getAllTVShowsSuccess",
+  setChoice = "setChoice"
 }
 
 export type IMediasActionType =
@@ -42,6 +50,9 @@ export type IMediasActionType =
   | { type: MediasTyp.setOneMedia, selectedMedia: number }
   | { type: MediasTyp.getOneMedia, mediaInfo: ISelectedMedia }
   | { type: MediasTyp.mediasByCategory, Category: Genre }
+  | { type: MediasTyp.getAllTVShows }
+  | { type: MediasTyp.getAllTVShowsSuccess, TVShows: ITVShows[] }
+  | { type: MediasTyp.setChoice, Choice: string }
 
 const reducerMedias = (state: IMedias = initialStateMedias, action: IMediasActionType): IMedias => {
   switch (action.type) {
@@ -70,6 +81,16 @@ const reducerMedias = (state: IMedias = initialStateMedias, action: IMediasActio
         ...state,
         mediaInfo: action.mediaInfo
       }
+    case MediasTyp.getAllTVShowsSuccess:
+      return {
+        ...state,
+        TVShows: action.TVShows
+      }
+    case MediasTyp.setChoice:
+      return {
+        ...state,
+        choice: action.Choice
+      }
     default:
       return state
   }
@@ -92,8 +113,8 @@ const MediasContextProvider = (props: any): JSX.Element => {
     switch (action.type) {
       case MediasTyp.getAllMedias:
         const responseForAll = await tmdbList().get('', { params: {} });
-        let res = _.orderBy(responseForAll.data.results, t => t.vote_count, "asc");
-        dispatch({ type: MediasTyp.getAllMediasSuccess, medias: res });
+        // let res = _.orderBy(responseForAll.data.results, t => t.vote_count, "asc");
+        dispatch({ type: MediasTyp.getAllMediasSuccess, medias: responseForAll.data.results });
         break;
       case MediasTyp.getAllMediaBySearch:
         const responseBySearch = await tmdbSearch().get('', { params: { query: action.keyword } });
@@ -110,6 +131,11 @@ const MediasContextProvider = (props: any): JSX.Element => {
         const responseGenres = await tmdbGetAllGenres().get('', { params: {} });
         let resGenres = responseGenres.data.genres;
         dispatch({ type: MediasTyp.getAllGenresSuccess, genres: resGenres })
+        break;
+      case MediasTyp.getAllTVShows:
+        const responseTVShows = await tmdbGetTVShows().get('', { params: {} });
+        let resTVShows = responseTVShows.data.results;
+        dispatch({ type: MediasTyp.getAllTVShowsSuccess, TVShows: resTVShows })
         break;
 
       default: dispatch(action)

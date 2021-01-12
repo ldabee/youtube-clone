@@ -69,21 +69,22 @@ const Menu: FC = () => {
             onClick={
               () => {
                 dispatch({ type: MediasTyp.getAllMedias });
-                dispatch({ type: MediasTyp.mediasByCategory, Category: {} as Genre })
+                dispatch({ type: MediasTyp.mediasByCategory, Category: {} as Genre });
+                dispatch({ type: MediasTyp.setChoice, Choice: 'Movies' });
               }
             }
           >
             <Home />
-            <h2>Accueil</h2>
+            <h2>Films</h2>
           </StyledMenuItem>
         </Link>
-        <StyledMenuItem onClick={() => { }}>
+        <StyledMenuItem onClick={() => { dispatch({ type: MediasTyp.setChoice, Choice: 'TVShows' }); dispatch({ type: MediasTyp.getAllTVShows }) }}>
           <Whatshot />
-          <h2>Tendances</h2>
+          <h2>Series</h2>
         </StyledMenuItem>
         <StyledMenuItem onClick={() => { }} >
           <Subscriptions />
-          <h2>Abonnements</h2>
+          <h2>Artistes</h2>
         </StyledMenuItem>
       </StyledMenu>
     </>

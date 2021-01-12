@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { IMedia } from '../../../model/IMedia';
+import { IMedia, ITVShows } from '../../../model/IMedia';
 import { Avatar } from '@material-ui/core';
 import Picture from '../Media/Picture';
 import MediaInfos from '../Media/MediaInfos';
 import styled from 'styled-components';
 
-const MediaItem: FC<IMedia> = (props: IMedia) => {
+const MediaItem: FC<IMedia | ITVShows> = (props: IMedia | ITVShows) => {
 
   const StyledMediaItemWrapper = styled.div`
    max-width: 300px;

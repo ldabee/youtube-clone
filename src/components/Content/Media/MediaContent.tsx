@@ -1,7 +1,7 @@
 import React, { FC, useContext, useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 //Interfaces
-import { IMedia } from '../../../model/IMedia';
+import { IMedia, ITVShows } from '../../../model/IMedia';
 //Components
 import MediaItem from './MediaItem';
 //Libraries
@@ -41,24 +41,38 @@ const MediaContent: FC = () => {
   }, [state.Category])
 
   const renderMedias = () => {
-    return (
-      !_.isEmpty(state.Category) ?
-        state?.medias?.filter((it: IMedia) => it.genre_ids.includes(state.Category.id)).map((media: IMedia) =>
-          <div key={media.id}>
-            <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
-              <MediaItem  {...media} />
-            </Link>
-          </div>
+    switch (state.choice) {
+      case 'Movies':
+        return (
+          !_.isEmpty(state.Category) ?
+            state?.medias?.filter((it: IMedia) => it.genre_ids.includes(state.Category.id)).map((media: IMedia) =>
+              <div key={media.id}>
+                <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
+                  <MediaItem  {...media} />
+                </Link>
+              </div>
+            )
+            :
+            state?.medias?.map((media: IMedia) =>
+              <div key={media.id}>
+                <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
+                  <MediaItem  {...media} />
+                </Link>
+              </div>
+            )
         )
-        :
-        state?.medias?.map((media: IMedia) =>
-          <div key={media.id}>
-            <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
-              <MediaItem  {...media} />
-            </Link>
-          </div>
+      case 'TVShows':
+        return (
+          state?.TVShows?.map((media: ITVShows) =>
+            <div key={media.id}>
+              <Link to={'/watch'} onClick={() => handleClickMedia(media.id)}>
+                <MediaItem  {...media} />
+              </Link>
+            </div>
+          )
         )
-    )
+    }
+
 
   }
 

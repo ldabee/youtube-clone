@@ -1,8 +1,15 @@
-import { createStyles, Divider, Grid, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import moment from 'moment';
 import React, { useContext, FC, useEffect } from 'react';
 import { MediasContext, MediasTyp } from '../../../context/MediasContext';
-import { ISelectedMedia } from '../../../model/IMedia';
+import { Genre, ISelectedMedia } from '../../../model/IMedia';
+import styled from 'styled-components';
+
+const VideosWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  display: flex
+`
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,8 +17,8 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(0),
       display: 'flex',
       flexDirection: 'column',
-      width: '95%',
-      padding: '10px',
+      width: '100%',
+      padding: '50px',
       backgroundColor: "rgba(32, 32, 32,.21) !important",
       color: 'white'
     },
@@ -29,43 +36,63 @@ const MediaDetail: FC = () => {
     return () => dispatch({ type: MediasTyp.getOneMedia, mediaInfo: {} as ISelectedMedia })
   }, [])
 
-  const video = (state?.mediaInfo?.videos && state?.mediaInfo?.videos.length) ? state?.mediaInfo?.videos?.find((video) => video.key !== undefined || video.key !== null)?.key : '';
-
   return (
-    <div>
+    <div style={{ display: 'contents' }}>
       <Grid container spacing={3} className={classes.paper}>
-        <Grid container wrap={"nowrap"}>
-          <Grid item xs={10}>
-            {video ?
-              < iframe id="inlineFrameExample"
-                title="unique"
-                width="1280"
-                height="720"
-                allowFullScreen
-                src={`https://www.youtube.com/embed/${video}`}
-                style={{ border: 'none' }}
-              >
-              </iframe> :
-              <div style={{ maxWidth: 1280, height: 720 }}>
-                <img src={`https://image.tmdb.org/t/p/original/${state.mediaInfo.poster_path}`} alt='' style={{ width: '100%', height: 'auto', maxWidth: '400px' }} />
-              </div>
-            }
-          </Grid>
-        </Grid>
-        <Grid container spacing={3} alignContent={'center'} style={{ color: 'white' }}>
-          <Grid item xs={12}>
-            <h1>{state.mediaInfo.title}</h1>
-            <span>{state.mediaInfo.vote_count} votes . {moment(state.mediaInfo.release_date).format('MMMM Do YYYY')}</span>
-          </Grid>
-          <Grid item xs={12}>
-            <Divider className={classes.dividerColor} />
-          </Grid>
-          <Grid item xs={12}>
-            <p>{state.mediaInfo.overview}</p>
-          </Grid>
-        </Grid>
+        <Grid container>
+          <div style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${state.mediaInfo.backdrop_path})`,
+            objectFit: 'cover',
+            minHeight: '570px',
+            display: 'flex',
+            justifyContent: 'center',
+            backgroundPosition: 'inherit',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
 
+          }}>
+            <div style={{ display: 'flex', width: '100%', backgroundColor: 'rgba(183,45,64,0.79)', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', width: '80%', alignItems: 'center' }}>
+                <div><img src={`https://image.tmdb.org/t/p/w300/${state.mediaInfo.belongs_to_collection?.poster_path}`} alt="" /></div>
+                <div style={{
+                  minHeight: '72%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-around',
+                  marginLeft: '15px'
+                }}>
+                  <h2>{state.mediaInfo.original_title} ({new Date(state.mediaInfo.release_date).getFullYear()})</h2>
+                  <div>{moment(state.mediaInfo.release_date).format('DD/MM/YYYY')} ({state?.mediaInfo?.original_language}) . {state.mediaInfo?.genres?.map((genre: Genre) => <span>{genre.name},&nbsp;</span>)}</div>
+                  <div>
+                    <span style={{ fontStyle: 'italic' }}>{state.mediaInfo.tagline}</span>
+                    <h4>Synopsis</h4>
+                    <p>{state.mediaInfo.overview}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Grid>
+        <Grid container>
+          <h4>Medias</h4>
+          <VideosWrapper>
+            {state.mediaInfo.videos?.map((vid) =>
+              <div>
+                < iframe id="inlineFrameExample"
+                  title="unique"
+                  width="533"
+                  height="300"
+                  allowFullScreen
+                  src={`https://www.youtube.com/embed/${vid.key}`}
+                  style={{ border: 'none' }}
+                >
+                </iframe>
+              </div>
+            )}
+          </VideosWrapper>
+        </Grid>
       </Grid>
+
     </div>
   )
 }

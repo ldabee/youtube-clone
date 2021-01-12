@@ -40,15 +40,15 @@ const MenuPanel: FC<IMenuPanelProps> = ({ viewLeftMenu, ClosePanel }) => {
         <Divider classes={{ root: classes.DividerStyle }} />
         <StyledMenuItem fromPanel>
           <Home />
-          <h2>Accueil</h2>
+          <h2>Films</h2>
         </StyledMenuItem>
         <StyledMenuItem fromPanel>
           <Whatshot />
-          <h2>Tendances</h2>
+          <h2>Series</h2>
         </StyledMenuItem>
         <StyledMenuItem fromPanel>
           <Subscriptions />
-          <h2>Abonnements</h2>
+          <h2>Artistes</h2>
         </StyledMenuItem>
         <Divider classes={{ root: classes.DividerStyle }} />
         <StyledMenuItem fromPanel onClick={() => setViewCategory(!viewCategory)}>
