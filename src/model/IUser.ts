@@ -3,5 +3,6 @@ export type IUser = {
   firstname: string;
   lastname: string;
   email: string;
-  password: number
+  password: number;
+  avatar: string
 }

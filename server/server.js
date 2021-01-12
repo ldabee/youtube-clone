@@ -14,6 +14,17 @@ const PORT = process.env.PORT || 4001
 // Create express app
 const app = express()
 
+// const fs = require('fs');
+// const { exec } = require('child_process')
+// // require('child_process').exec('start "" "C:\\Users\\dabee\\Desktop\\Jeux\\SNESSEmu"');
+// fs.readdirSync('C:\\Users\\dabee\\Desktop\\Jeux').forEach(file => {
+//   // if (file.split('.')[1] === "exe") {
+//   console.log(file);
+//   // exec(`C:\\Users\\dabee\\Desktop\\Jeux\\SNESSEmu\\${file}`);
+//   // }
+// })
+
+
 // Apply middleware
 // Note: Keep this at the top, above routes
 app.use(cors())

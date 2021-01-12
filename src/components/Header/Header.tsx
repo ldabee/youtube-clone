@@ -8,6 +8,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Avatar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import MenuPanel from '../Menu/AdditionalsPanels/MenuPanel';
+import UserPanel from '../Menu/AdditionalsPanels/UserPanel';
 
 import { UsersContext, UsersTyp } from '../../context/UsersContext';
 
@@ -17,7 +18,7 @@ const StyledWrapperHeader = styled.div`
   justify-content: space-between;
   padding:'20px';
   color: white;
-  background-color: rgb(32, 32, 32);
+  background-color: rgba(32, 32, 32);
   position:sticky;
   top:0;
   z-index:100;
@@ -26,6 +27,14 @@ const StyledWrapperHeader = styled.div`
 const Header = () => {
   const UsersState = useContext(UsersContext);
   const [viewLeftMenu, setViewLefMenu] = useState<boolean>(false);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+    console.log(event.clientX, event.clientY)
+  };
+
 
   useEffect(() => {
     UsersState.dispatch({ type: UsersTyp.getAllusers })
@@ -51,13 +60,14 @@ const Header = () => {
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
-          <IconButton color="inherit">
-            <Avatar />
+          <IconButton color="inherit" onClick={(event) => handleClick(event)}>
+            <Avatar src={UsersState.state.users[0]?.avatar} />
           </IconButton>
         </div>
       </StyledWrapperHeader>
 
       <MenuPanel viewLeftMenu={viewLeftMenu} ClosePanel={() => setViewLefMenu(false)} />
+      {anchorEl !== null && <UserPanel anchorEl={anchorEl} handleClose={() => setAnchorEl(null)} />}
     </>
   )
 }
