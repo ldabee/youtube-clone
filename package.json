@@ -2,8 +2,8 @@
   "name": "youtube-clone",
   "version": "0.1.0",
   "private": true,
-  "main": "src/index.tsx",
-  "proxy": "http://localhost:4001/",
+  "main": "server/server.js",
+  "proxy": "http://localhost:4001",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -44,7 +44,7 @@
     "server": "nodemon node sever.js",
     "start-server": "nodemon server/server.js --watch server/*",
     "start-front": "react-scripts start",
-    "start": "concurrently \"npm run start-server\" \"npm run start-front\" --kill-others --kill-others-on-fail"
+    "start": "nodemon node sever.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,7 +59,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ],
-    "proxy": "http://localhost:8080"
+    ]
   }
 }
