@@ -48,7 +48,6 @@ const Header = () => {
             <MenuIcon />
           </IconButton>
           <img style={{ height: '25px', objectFit: 'contain', marginLeft: '20px' }} src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="yt icon" />
-          <span>V2.0</span>
         </div>
         <Search />
         <div style={{ display: 'flex', alignItems: 'center' }}>
